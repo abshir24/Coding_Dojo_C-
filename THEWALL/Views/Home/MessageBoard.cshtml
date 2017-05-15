@@ -1,0 +1,48 @@
+@{
+    ViewData["Title"] = "Message Board";
+}
+<head>
+    <meta charset ="UTF-8">
+        <meta name="viewport" content="width=device-width,intial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible"content="ie=dge">
+        <title>MessageBoard</title>
+</head>
+<article>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-4 col-md-4">
+                <div class = "panel panel-default">
+                    <form action="CreateMessage" method = "post">
+                        <textarea class="form-controlcounted" name="message" placeholder = "whats on your mind" cols= "100" rows="10" style="margin-bottom:10px;"></textarea>
+                        <button class="btn btn-info" type ="submit"> Post New Message</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</article>
+<div>
+    @{
+        foreach(var message in @ViewBag.Message){
+            <p>@message["FirstName"] @message["created_at"]</p>
+            <p>@message["Message"]</p>
+            <form action='CreateComment/@message["MessageId"]/@message["UserId"]' method = "post">
+                <textarea name="Comment" id="" cols="30" rows="2"></textarea>
+                <button class="btn btn-info" type ="submit">Comment</button>
+            </form>
+            foreach(var comment in @ViewBag.Comment)
+            {
+                if(comment["MessageId"] == message["MessageId"]){
+                    <p>@comment["FirstName"]</p>
+                    <p>@comment["Comment"]</p>
+                    }
+                }
+             }
+        }
+</div>
+
+<div>
+    <form action="Logout" method = "post">
+        <button class="btn btn-primary" type ="submit">Logout</button>
+    </form>
+</div>

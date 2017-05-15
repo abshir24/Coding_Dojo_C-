@@ -1,0 +1,138 @@
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+@{
+    ViewData["Title"] = "Home Page";
+}
+<html>
+    <head>
+        <meta charset ="UTF-8">
+        <meta name="viewport" content="width=device-width,intial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible"content="ie=dge">
+        <title>Bookie Login</title>
+        <style>
+body{
+    font-family: 'Open Sans', sans-serif;
+}
+.logo i{
+    font-size: 31px;
+    margin-right: 4px;
+    word-spacing: 14px;
+}
+
+.logo{
+    color: white;
+    margin: 0;
+    font-size: 20px;
+    padding: 4px 0;
+    padding-bottom: 15px;
+}
+
+header{
+    background: #3b5998;
+    padding-top: 20px;
+}
+header .form-group{
+    margin-bottom: 0px;
+}
+header .btn-header-login{
+    margin-bottom: 15px;
+}
+.login-main{
+    margin-top: 130px;
+}
+.multibox{
+    padding-left:0px;
+    padding-bottom: 10px;
+}
+.login-main span{
+    font-size:12px;
+}
+        </style>
+    </head>
+    <header>
+        <div class= "container">
+        <div class= "row">
+            <div class = "col-sm-6">
+                <div class = "logo">DojoConnections</div>
+            </div>
+        <form action="LoginLogic" method = "post">
+            <div class="col-sm-6 hidden-xs">
+                <div class = "row">
+                    <div class = "col-sm-5">
+                        <div class= "form-group">
+                            <input type="text" class="form-control" placeholder="Email Address" name = "Email">
+                        </div>
+                    </div>
+                        <div class = "col-sm-5">
+                            <div class="form-group">
+                                <input type="text" class="form-control" placeholder="Password" name ="Password"> 
+                            </div>
+                        </div>
+                        <div class="col-sm-2" style ="padding-left: 0px;">
+                            <div class="form-group">
+                                <input type="submit" value="login" class="btn btn-primary">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+        </div>
+    </header>
+    <article class="container">
+        <div class="row">
+            <div class="col-sm-8">
+                <div class="login-main">
+                    <h4><i class="fa fa-dashboard"></i>DojoConnections </h4> 
+                    <h3><i class="fa fa-dashboard">Making Connections With All Cyber Ninjas Around The World</i></h3>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="">
+                    <h3><i class="fa fa-shield"></i>Register Now</h3>
+                    <hr>
+                </div>
+                <form action="RegistrationLogic" method ="post">
+                    <div class="form-group">
+                        <label class="control-label">Name</label>
+                        <input type="text" class="form-control" placeholder= "Name" name = "Name">
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label">Email</label>
+                        <input type="text" class="form-control" placeholder= "Email" name = "Email">
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label">Password</label>
+                        <input type="text" class="form-control" placeholder= "Password" name = "Password">
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label" for="">Repeat Password</label>
+                        <input type="text" class="form-control" placeholder="Repeat Password" name ="PasswordConfirmation"> 
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label" for="">Description</label>
+                        <textarea name="Description" id="" cols="30" rows="2"></textarea>
+                    </div>
+                    <div style="height:10px"></div>
+                    <div class="form-group">
+                        <label class="control-label" for=""></label>
+                        <input type="submit" class="btn btn-primary">
+                    </div>
+                </form>
+                <div>
+                    @{
+                        foreach(var error in ViewBag.regerrors)
+                        {
+                            if(@error.Errors.Count > 0){
+                                <p>@error.Errors[0].ErrorMessage</p>
+                            }
+                        }
+                    }
+                    <p>@ViewBag.logerror</p>
+                </div>
+            </div>
+        </div>
+    </article>
+</html>

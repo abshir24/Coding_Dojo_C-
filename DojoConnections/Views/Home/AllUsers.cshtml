@@ -1,0 +1,44 @@
+@{
+    ViewData["Title"] = "Home Page";
+}
+<html>
+    <head>
+        <meta charset ="UTF-8">
+        <meta name="viewport" content="width=device-width,intial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible"content="ie=dge">
+        <title>DojoConnections Login</title>
+    </head>
+    <body>
+
+        <h3>Users you may want to connect with: </h3>
+
+        <table class= "table table-striped"> 
+            <thead>
+                <th>Name</th>
+                <th>Action</th>
+            </thead>
+            <tbody>
+            @{      
+                @foreach(var users in @ViewBag.UserNetwork.Users)
+                {
+                    @foreach(var user in @ViewBag.AllUsers)
+                    {
+                        if(user.UserId != users.UserId)
+                        {
+                            <tr>
+                                <td>@user.Name</td>
+                                <td><a href="Connect/@user.NetworkId">Connect</a></td>
+                            </tr>
+                        }
+                    }
+                }
+            }
+            </tbody>
+        </table>
+        <a href="/ProfilePage">Home</a>
+
+        <form action = "Logout" method = "post">
+            <input type="submit" value = "logout">
+        </form>
+    </body>
+</html>

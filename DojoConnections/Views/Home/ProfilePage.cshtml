@@ -1,0 +1,63 @@
+@{
+    ViewData["Title"] = "Home Page";
+}
+<html>
+    <head>
+        <meta charset ="UTF-8">
+        <meta name="viewport" content="width=device-width,intial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible"content="ie=dge">
+        <title>Bookie Login</title>
+    </head>
+    <body>
+        <h1>Hello @ViewBag.User.Name</h1>
+        
+        <h3>Here is your profile description:</h3>
+        <p> Profile Description</p>
+
+        <h3>Your Professional Network: </h3>
+            @{
+                @foreach(var friend in @ViewBag.Network.Users)
+                {
+                    @foreach(var user in @ViewBag.AllUsers)
+                    {
+                        if(user.UserId == friend.UserId && user.UserId != @ViewBag.User.UserId )
+                        {
+                            <tr>
+                                <td>@user.Name</td>
+                            </tr>
+                        }
+                    }       
+                }
+            }
+        <h3>Invitations</h3>
+        <small>The following people asked you to be in their network: </small>
+
+        <table> 
+            <thead>
+                <th>Name</th>
+                <th>Action</th>
+            </thead>
+            <tbody>
+                @{
+                    @foreach(var invitation in @ViewBag.Network.Invitations)
+                    {
+                        @foreach(var user in @ViewBag.AllUsers)
+                        {
+                            if(user.UserId == invitation.UserId)
+                            {
+                                <tr>
+                                    <td>@user.Name</td>
+                                    <td><a href="Accept/@user.UserId">Accept</a> <a href="Ignore/@user.UserId">Ignore</a></td>
+                                </tr>
+                            }
+                        }       
+                    }
+                }
+            </tbody>
+        </table>
+        <a href="AllUsers">All Users</a>
+         <form action = "Logout" method = "post">
+            <input type="submit" value = "logout">
+        </form>
+    </body>
+</html>
